@@ -3,9 +3,6 @@
 .Grid-line {}
 
 .Grid-text {
-  font-family: Times New Roman;
+  font-family: 'Times New Roman';
   font-size: 24;
-  stroke: #00ff00;
-  fill: #0000ff;
-  color: white;
 }

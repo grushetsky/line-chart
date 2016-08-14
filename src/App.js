@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import LineChart from './components/LineChart';
+import Line from './components/Line';
 
 import './styles/App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <LineChart width={800} height={400} data={data}>
-            {/* <Line /> */}
+            <Line />
           </LineChart>
         </div>
       </div>

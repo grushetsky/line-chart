@@ -7,6 +7,9 @@ import '../styles/LineChart.css';
 
 import moment from 'moment';
 
+// TODO Extract into constants
+const rangeInDays = 366;
+
 class LineChart extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
@@ -20,10 +23,11 @@ class LineChart extends Component {
       PropTypes.bool,
       PropTypes.object
     ]),
-    domainRange: React.PropTypes.shape({
-      from: React.PropTypes.string,
-      to: React.PropTypes.string
+    domainRange: PropTypes.shape({
+      from: PropTypes.string,
+      to: PropTypes.string
     }),
+    yStep: PropTypes.number
   }
 
   static defaultProps = {
@@ -31,18 +35,24 @@ class LineChart extends Component {
     domainRange: {
       from: moment().subtract(1, `year`).format(),
       to: moment().format()
-    }
+    },
+    yStep: 2000
   }
 
   render() {
-    const { width, height, xAxis, yAxis, domainRange, data, children } = this.props;
+    const { width, height, xAxis, yAxis, domainRange, data, yStep, children } = this.props;
+
+    const maxValue = Math.max(...data.map(dataItem => dataItem.value));
+    const maxHeight = maxValue - (maxValue % yStep) + yStep;
 
     return (
-      <svg className="LineChart" width={width} height={height} viewBox={`-20 -10 ${width} ${height + 20}`} version="1.1">
+      <svg className="LineChart" width={width} height={height} viewBox={`-20 -20 ${width} ${height + 30}`} version="1.1">
         {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={domainRange} horizontal />}
         {yAxis && <Axis chartWidth={width} chartHeight={height} />}
-        <Grid chartWidth={width} chartHeight={height} maxValue={Math.max(...data.map(dataItem => dataItem.value))} />
-        {children}
+        <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} />
+        {React.Children.map(children, child =>
+          React.cloneElement(child, { ...child.props, data, maxHeight, chartHeight: height, xStep: width / rangeInDays })
+        )}
       </svg>
     );
   }
