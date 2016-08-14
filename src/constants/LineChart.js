@@ -3,7 +3,7 @@ export default {
   height: 400,
   range: {
     from: 1,
-    to: 366,
+    to: 80,
     kind: `days`
   },
   yGridStep: 2000

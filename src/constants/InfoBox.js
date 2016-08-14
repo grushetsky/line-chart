@@ -3,6 +3,7 @@ export default {
   height: 75,
   xMargin: 5,
   yMargin: 5,
+  xPointIndent: 15,
   yPointIndent: 15,
   cornerRadius: 5,
   shadow: {

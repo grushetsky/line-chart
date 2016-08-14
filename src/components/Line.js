@@ -48,7 +48,9 @@ class Line extends Component {
       <g className="Line">
         <path className="Line-path" d={this.composeLineExpression()} />
         {this.getCoordinatesFromData().map((dataItem, index) => {
-          const xInfoBox = chartWidth - dataItem.x - infoBox.width < infoBox.xMargin ? chartWidth - infoBox.width : dataItem.x;
+
+          // TODO Extract these calculations for popup positioning
+          const xInfoBox = chartWidth - dataItem.x - infoBox.width < infoBox.xMargin ? dataItem.x - infoBox.xPointIndent - infoBox.width : dataItem.x + infoBox.xPointIndent;
           const yInfoBox = dataItem.y - infoBox.height - infoBox.yPointIndent < infoBox.yMargin ? infoBox.yMargin : dataItem.y - infoBox.height - infoBox.yPointIndent;
 
           const isValueHovered = this.state.hoveredValue.index === index;
@@ -56,14 +58,14 @@ class Line extends Component {
           return (
             <g key={index}>
               {isValueHovered && <SelectionDot x={dataItem.x} y={dataItem.y} />}
+              <ValueGuide x={dataItem.x} y={dataItem.y} chartHeight={chartHeight} hovered={isValueHovered}
+                onMouseOver={() => this.setState({ hoveredValue: { index, ...dataItem } })}
+                onMouseLeave={() => this.setState({ hoveredValue: {} })} />
               {isValueHovered &&
                 <InfoBox x={xInfoBox} y={yInfoBox}
                   width={infoBox.width} height={infoBox.height}
                   cornerRadius={infoBox.cornerRadius} data={dataItem} />
               }
-              <ValueGuide x={dataItem.x} y={dataItem.y} chartHeight={chartHeight} hovered={isValueHovered}
-                onMouseOver={() => this.setState({ hoveredValue: { index, ...dataItem } })}
-                onMouseLeave={() => this.setState({ hoveredValue: {} })} />
             </g>
           )
         })}

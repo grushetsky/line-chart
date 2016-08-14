@@ -6,8 +6,8 @@ import { getRandomNumber } from '../helpers';
 
 const days = chart.range.to;
 const sumRange = {
-  from: 5900,
-  to: 6500
+  from: 5500,
+  to: 7000
 };
 
 const randomData = Array.from({ length: days }, (k, daysCount) => ({
