@@ -6,8 +6,6 @@ import ValueGuide from './ValueGuide';
 
 import '../styles/Line.css';
 
-import moment from 'moment';
-
 class Line extends Component {
   state = {
     hoveredValue: {}
@@ -28,7 +26,7 @@ class Line extends Component {
     const { data, chartHeight, maxHeight, xStep } = this.props;
 
     return data.reduce((result, dataItem, index) => {
-      const x = moment(dataItem.time).dayOfYear() * xStep;
+      const x = index * xStep;
       const y = ((maxHeight - dataItem.value) * chartHeight) / maxHeight;
 
       return [...result, { ...dataItem, x, y }];
