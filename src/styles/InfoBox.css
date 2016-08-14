@@ -1,0 +1,32 @@
+.InfoBox {
+  /*-webkit-filter: drop-shadow(5px 5px 15px #2079d1);*/
+          /**/
+}
+
+.InfoBox-rect {
+  fill: #ffffff;
+  stroke: #e5e7e9;
+  stroke-width: 1;
+  /* filter: drop-shadow(5px 5px 15px #e5e7e9); */
+}
+
+.InfoBox-text-date {
+  fill: #b4b3b3;
+  font-size: 13pt;
+}
+
+.InfoBox-text-value {
+  fill: #222222;
+}
+
+.InfoBox-text-diff-higher {
+  fill: #e5e7e9;
+}
+
+.InfoBox-text-diff-lower {
+  fill: #e5e7e9;
+}
+
+.InfoBox-text-diff-stable {
+  fill: #e5e7e9;
+}

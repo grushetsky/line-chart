@@ -1,8 +1,12 @@
 .Grid {}
 
-.Grid-line {}
+.Grid-line {
+  stroke: #e5e7e9;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
 
 .Grid-text {
-  font-family: 'Times New Roman';
   font-size: 24;
+  fill: #afb4ba;
 }

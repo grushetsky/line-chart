@@ -1,0 +1,7 @@
+.SelectionDot {}
+
+.SelectionDot-circle {
+  fill: #74a3c7;
+  stroke: #f6f7f8;
+  stroke-width: 3;
+}

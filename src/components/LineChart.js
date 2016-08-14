@@ -46,7 +46,7 @@ class LineChart extends Component {
     const maxHeight = maxValue - (maxValue % yStep) + yStep;
 
     return (
-      <svg className="LineChart" width={width} height={height} viewBox={`-20 -20 ${width} ${height + 30}`} version="1.1">
+      <svg className="LineChart" width={width} height={height} viewBox={`-20 -30 ${width} ${height + 30}`} version="1.1">
         {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={domainRange} horizontal />}
         {yAxis && <Axis chartWidth={width} chartHeight={height} />}
         <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} />

@@ -27,8 +27,8 @@ class Grid extends Component {
       <g className="Grid">
         {lines.map((lineItem, index) =>
           <g key={index}>
-            <line className="Grid-line" stroke="#e5e7e9" strokeWidth="2" strokeLinecap="round" x1="0" y1={lineItem.height} x2={chartWidth} y2={lineItem.height} />
-            <text textAnchor="end" x="-18" y={lineItem.height - 2} fill="#afb4ba">{lineItem.text}</text>
+            <line className="Grid-line" x1="0" y1={lineItem.height} x2={chartWidth} y2={lineItem.height} />
+            <text className="Grid-text" textAnchor="end" x="-18" y={lineItem.height - 2}>{lineItem.text}</text>
           </g>
         )}
       </g>
