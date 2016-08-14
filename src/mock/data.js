@@ -1,15 +1,21 @@
 import moment from 'moment';
 
+import chart from '../constants/LineChart';
+
 import { getRandomNumber } from '../helpers';
 
-const days = 50;
+const days = chart.range.to;
+const sumRange = {
+  from: 5900,
+  to: 6500
+};
 
-const data = Array.from({ length: days }, (k, dasyCount) => ({
-  value: getRandomNumber(6000, 6700),
-  time: moment().subtract(1, `year`).add(dasyCount, `days`).format()
+const randomData = Array.from({ length: days }, (k, daysCount) => ({
+  value: getRandomNumber(sumRange.from, sumRange.to),
+  time: moment().subtract(1, `year`).add(daysCount, `days`).format()
 })).reduce((result, dataItem, index, array) => [
   ...result,
   { ...dataItem, diff: !index ? 0 : dataItem.value - array[index - 1].value }
 ], []);
 
-export default data;
+export default randomData;

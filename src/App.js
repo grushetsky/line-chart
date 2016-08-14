@@ -5,6 +5,8 @@ import Line from './components/Line';
 
 import './styles/App.css';
 
+import chart from './constants/LineChart';
+
 import data from './mock/data';
 
 class App extends Component {
@@ -12,10 +14,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Line Chart</h2>
+          <h2>Time-based Line Chart</h2>
         </div>
         <div className="App-body">
-          <LineChart width={800} height={400} data={data}>
+          <LineChart width={chart.width} height={chart.height} yGridStep={chart.yGridStep} range={chart.range} data={data}>
             <Line />
           </LineChart>
         </div>

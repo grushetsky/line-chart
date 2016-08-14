@@ -8,6 +8,10 @@ class Axis extends Component {
     chartHeight: PropTypes.number,
     horizontal: PropTypes.bool,
     domainKind: PropTypes.oneOf([`time`]),
+    domainRange: PropTypes.shape({
+      from: PropTypes.string,
+      to: PropTypes.string
+    }),
     ticks: PropTypes.arrayOf(PropTypes.object)
   }
 
@@ -38,7 +42,7 @@ class Axis extends Component {
 
     return (
       <g className="Axis">
-        <line className={`Axis-${horizontal ? `x` : `y`}`} stroke="#4b4b4b" strokeWidth="4" {...coordinates} />
+        <line className={`Axis-${horizontal ? `x` : `y`}`} {...coordinates} />
       </g>
     );
   }

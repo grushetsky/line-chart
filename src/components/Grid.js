@@ -7,20 +7,17 @@ class Grid extends Component {
     chartWidth: PropTypes.number,
     chartHeight: PropTypes.number,
     maxHeight: PropTypes.number,
-    step: PropTypes.number
-  }
-
-  static defaultProps = {
-    step: 2000
+    yStep: PropTypes.number
   }
 
   render() {
-    const { chartWidth, chartHeight, maxHeight, step } = this.props;
+    const { chartWidth, chartHeight, maxHeight, yStep } = this.props;
 
-    const segmentsCount = Math.round(maxHeight / step);
-    const lines = Array.from({ length: segmentsCount + 1 }, (value, index) => (
-        { text: `${(index * step) / 100}`, height: ((segmentsCount - index) * step * chartHeight) / maxHeight }
-      )
+    const segmentsCount = Math.round(maxHeight / yStep);
+    const lines = Array.from({ length: segmentsCount + 1 }, (value, index) => ({
+        text: `${(index * yStep) / 100}`,
+        height: ((segmentsCount - index) * yStep * chartHeight) / maxHeight
+      })
     ).reverse();
 
     return (

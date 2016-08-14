@@ -6,6 +6,8 @@ import ValueGuide from './ValueGuide';
 
 import '../styles/Line.css';
 
+import infoBox from '../constants/InfoBox';
+
 class Line extends Component {
   state = {
     hoveredValue: {}
@@ -40,20 +42,31 @@ class Line extends Component {
   }
 
   render() {
-    const { chartHeight } = this.props;
+    const { chartHeight, chartWidth } = this.props;
 
     return (
       <g className="Line">
         <path className="Line-path" d={this.composeLineExpression()} />
-        {this.getCoordinatesFromData().map((dataItem, index) =>
-          <g key={index}>
-            {this.state.hoveredValue.index === index && <SelectionDot x={dataItem.x} y={dataItem.y} />}
-            {this.state.hoveredValue.index === index && <InfoBox x={dataItem.x} y={dataItem.y} data={dataItem} />}
-            <ValueGuide x={dataItem.x} y={dataItem.y} chartHeight={chartHeight} hovered={this.state.hoveredValue.index === index}
-              onMouseOver={() => this.setState({ hoveredValue: { index, ...dataItem } })}
-              onMouseLeave={() => this.setState({ hoveredValue: {} })} />
-          </g>
-        )}
+        {this.getCoordinatesFromData().map((dataItem, index) => {
+          const xInfoBox = chartWidth - dataItem.x - infoBox.width < infoBox.xMargin ? chartWidth - infoBox.width : dataItem.x;
+          const yInfoBox = dataItem.y - infoBox.height - infoBox.yPointIndent < infoBox.yMargin ? infoBox.yMargin : dataItem.y - infoBox.height - infoBox.yPointIndent;
+
+          const isValueHovered = this.state.hoveredValue.index === index;
+
+          return (
+            <g key={index}>
+              {isValueHovered && <SelectionDot x={dataItem.x} y={dataItem.y} />}
+              {isValueHovered &&
+                <InfoBox x={xInfoBox} y={yInfoBox}
+                  width={infoBox.width} height={infoBox.height}
+                  cornerRadius={infoBox.cornerRadius} data={dataItem} />
+              }
+              <ValueGuide x={dataItem.x} y={dataItem.y} chartHeight={chartHeight} hovered={isValueHovered}
+                onMouseOver={() => this.setState({ hoveredValue: { index, ...dataItem } })}
+                onMouseLeave={() => this.setState({ hoveredValue: {} })} />
+            </g>
+          )
+        })}
       </g>
     );
   }

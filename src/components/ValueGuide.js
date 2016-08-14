@@ -4,7 +4,7 @@ import '../styles/ValueGuide.css';
 
 import cn from 'classnames';
 
-const clickZoneWidth = 7;
+import constants from '../constants/ValueGuide';
 
 class Line extends Component {
   static propTypes = {
@@ -22,7 +22,7 @@ class Line extends Component {
     return (
       <g className="ValueGuide">
         <rect className="ValueGuide-click-target"
-          x={x - (clickZoneWidth / 2)} y={y} width={clickZoneWidth} height={chartHeight - y}
+          x={x - (constants.clickZoneWidth / 2)} y={y} width={constants.clickZoneWidth} height={chartHeight - y}
           onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
         <line className={cn(`ValueGuide-line`, hovered && `ValueGuide-line-hovered`)}
           x1={x} y1={y} x2={x} y2={chartHeight} />

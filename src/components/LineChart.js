@@ -2,13 +2,9 @@ import React, { PropTypes, Component } from 'react';
 
 import Axis from './Axis';
 import Grid from './Grid';
+import ShadowFilter from './InfoBox/ShadowFilter';
 
 import '../styles/LineChart.css';
-
-import moment from 'moment';
-
-// TODO Extract into constants
-const rangeInDays = 366;
 
 class LineChart extends Component {
   static propTypes = {
@@ -23,48 +19,36 @@ class LineChart extends Component {
       PropTypes.bool,
       PropTypes.object
     ]),
-    domainRange: PropTypes.shape({
-      from: PropTypes.string,
-      to: PropTypes.string
+    range: PropTypes.shape({
+      from: PropTypes.number,
+      to: PropTypes.number,
+      kind: PropTypes.oneOf([`hours`, `days`, `weeks`])
     }),
-    yStep: PropTypes.number
+    yGridStep: PropTypes.number
   }
 
   static defaultProps = {
-    data: [],
-    domainRange: {
-      from: moment().subtract(1, `year`).format(),
-      to: moment().format()
-    },
-    yStep: 2000
+    data: []
   }
 
   render() {
-    const { width, height, xAxis, yAxis, domainRange, data, yStep, children } = this.props;
+    const { width, height, xAxis, yAxis, range, data, yGridStep, children } = this.props;
 
     const maxValue = Math.max(...data.map(dataItem => dataItem.value));
-    const maxHeight = maxValue - (maxValue % yStep) + yStep;
+    const maxHeight = maxValue - (maxValue % yGridStep) + yGridStep;
 
     return (
       <svg className="LineChart" width={width} height={height} viewBox={`-20 -50 ${width} ${height + 50}`} version="1.1">
-        <defs>
-          <filter id="shadow-filter">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="1" dy="1" result="offsetblur" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.5" />
-            </feComponentTransfer>
-            <feMerge>
-              <feMergeNode />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={domainRange} horizontal />}
+        <ShadowFilter />
+        {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={{ from: range.from, to: range.to }} horizontal />}
         {yAxis && <Axis chartWidth={width} chartHeight={height} />}
-        <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} />
+        <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} yStep={yGridStep} />
         {React.Children.map(children, child =>
-          React.cloneElement(child, { ...child.props, data, maxHeight, chartHeight: height, xStep: width / rangeInDays })
+          React.cloneElement(child, {
+            ...child.props, data, maxHeight,
+            chartHeight: height, chartWidth: width,
+            xStep: width / range.to
+          })
         )}
       </svg>
     );
