@@ -6,15 +6,3 @@
   stroke-linecap: round;
   fill: transparent;
 }
-
-.Line-value-guide {
-  stroke: transparent;
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-dasharray: 10, 10;
-  cursor: pointer;
-}
-
-.Line-value-guide:hover {
-  stroke: #e5e7e9;
-}

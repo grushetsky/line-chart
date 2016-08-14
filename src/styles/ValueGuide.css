@@ -1,0 +1,18 @@
+.ValueGuide {
+  cursor: pointer;
+}
+
+.ValueGuide-line {
+  stroke: transparent;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 10, 10;
+}
+
+.ValueGuide-line-hovered {
+  stroke: #e5e7e9;
+}
+
+.ValueGuide-click-target {
+  fill: transparent;
+}

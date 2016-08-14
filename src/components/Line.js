@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import SelectionDot from './SelectionDot';
 import InfoBox from './InfoBox';
+import ValueGuide from './ValueGuide';
 
 import '../styles/Line.css';
 
@@ -50,8 +51,7 @@ class Line extends Component {
           <g key={index}>
             {this.state.hoveredValue.index === index && <SelectionDot x={dataItem.x} y={dataItem.y} />}
             {this.state.hoveredValue.index === index && <InfoBox x={dataItem.x} y={dataItem.y} data={dataItem} />}
-            <line className="Line-value-guide"
-              x1={dataItem.x} y1={dataItem.y} x2={dataItem.x} y2={chartHeight}
+            <ValueGuide x={dataItem.x} y={dataItem.y} chartHeight={chartHeight} hovered={this.state.hoveredValue.index === index}
               onMouseOver={() => this.setState({ hoveredValue: { index, ...dataItem } })}
               onMouseLeave={() => this.setState({ hoveredValue: {} })} />
           </g>

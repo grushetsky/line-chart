@@ -46,7 +46,20 @@ class LineChart extends Component {
     const maxHeight = maxValue - (maxValue % yStep) + yStep;
 
     return (
-      <svg className="LineChart" width={width} height={height} viewBox={`-20 -30 ${width} ${height + 30}`} version="1.1">
+      <svg className="LineChart" width={width} height={height} viewBox={`-20 -50 ${width} ${height + 50}`} version="1.1">
+        <defs>
+          <filter id="shadow-filter">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+            <feOffset dx="1" dy="1" result="offsetblur" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.5" />
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
         {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={domainRange} horizontal />}
         {yAxis && <Axis chartWidth={width} chartHeight={height} />}
         <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} />
