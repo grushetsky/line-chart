@@ -1,6 +1,6 @@
 {
   "name": "line-chart",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "homepage": "https://toxickg.github.io/line-chart",
   "devDependencies": {
@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "deploy": "VERSION=0.0.5 BUILD=0 && gh-pages -d build -m \"$VERSION-$BUILD\"",
+    "deploy": "VERSION=0.0.6 BUILD=0 && gh-pages -d build -m \"$VERSION-$BUILD\"",
     "clean": "rm -rf build",
     "publish": "npm run clean && npm run build && npm run deploy"
   },
