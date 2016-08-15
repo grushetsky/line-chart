@@ -3,6 +3,7 @@ import React, { PropTypes, Component } from 'react';
 import Axis from './Axis';
 import Grid from './Grid';
 import ShadowFilter from './InfoBox/ShadowFilter';
+import AxisLabel from './AxisLabel';
 
 import '../styles/LineChart.css';
 
@@ -36,18 +37,19 @@ class LineChart extends Component {
 
     const maxValue = Math.max(...data.map(dataItem => dataItem.value));
     const maxHeight = maxValue - (maxValue % yGridStep) + yGridStep;
+    const xStep = width / range.to;
 
     return (
-      <svg className="LineChart" width={width} height={height} viewBox={`-20 -50 ${width} ${height + 50}`} version="1.1">
+      <svg className="LineChart" width={width} height={height} viewBox={`-20 -50 ${width} ${height + 80}`} version="1.1">
         <ShadowFilter />
         {xAxis && <Axis chartWidth={width} chartHeight={height} domainRange={{ from: range.from, to: range.to }} horizontal />}
         {yAxis && <Axis chartWidth={width} chartHeight={height} />}
-        <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} yStep={yGridStep} />
+        <AxisLabel data={data} chartWidth={width} chartHeight={height} xStep={xStep} />
+        <Grid chartWidth={width} chartHeight={height} maxHeight={maxHeight} xStep={xStep} yStep={yGridStep} />
         {React.Children.map(children, child =>
           React.cloneElement(child, {
             ...child.props, data, maxHeight,
-            chartHeight: height, chartWidth: width,
-            xStep: width / range.to
+            chartHeight: height, chartWidth: width, xStep
           })
         )}
       </svg>

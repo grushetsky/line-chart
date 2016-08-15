@@ -1,3 +1,3 @@
 export default {
-  clickZoneWidth: 50
+  clickZoneWidth: 40
 };
