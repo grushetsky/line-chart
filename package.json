@@ -2,7 +2,7 @@
   "name": "line-chart",
   "version": "0.0.6",
   "private": true,
-  "homepage": "https://toxickg.github.io/line-chart",
+  "homepage": "https://grushetsky.github.io/line-chart",
   "devDependencies": {
     "babel-eslint": "6.1.2",
     "eslint": "3.3.0",

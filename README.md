@@ -1,6 +1,6 @@
 # Time-based Line Chart Example
 
-Demo: https://toxickg.github.io/line-chart
+[Demo](https://grushetsky.github.io/line-chart).
 
 ## Usage
 
